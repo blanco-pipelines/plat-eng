@@ -124,20 +124,42 @@ At this point both files should contain something different.
     ls -i ~/code/artifacts/data.txt
     ls -i ~/backup.txt
     ```
-21. Create a hard link named ~/data.txt from /code/artifacts/data.txt. Notice that both files share the same inode number — they’re actually the same file. **Remember:** hard links cannot span different file systems.
+21. Create a hard link named ~/data.txt from /code/artifacts/data.txt. Notice that both files share the same inode number — they’re actually the same file. **Remember:** hard links cannot span different file systems. Try appending data to one file and viewing that data in another.
     ```bash
-    ln ~/data.txt ~/code/artifacts/data.txt
+    ln ~/code/artifacts/data.txt ~/data.txt 
     ls -i ~/data.txt
     ls -i ~/code/artifacts/data.txt
+    cat ~/data.txt
+    echo "new line" >> ~/data.txt
+    cat ~/code/artifacts/data.txxt
     ```
-25. To see the stats of the file, run `stat ~/backup.txt` and `stat ~/data.txt` -- start editting here @
-
+25. View the stats of data.txt and backup.txt
+    ```
+    stat ~/backup.txt
+    stat ~/data.txt
+    stat ~/code/artifacts/data.txt
+    ```
+26. Make a soft link from ~/backup.txt to ~/scripts/backup.txt. Then use ls long listing on each file. 
+    ```
+    ln -s ~/backup.txt ~/scripts/backup.txt
+    ls -l ~/backup.txt
+    ls -l ~/scripts/backup.txt
+    ```
+27. Move backup.txt to ~/code/artifacts/backup.txt. This will break a soft link. Fix it.
 
 ### Part 5: File Execution 
-14. Navigate to ~/code/artifacts/files. Create a hard link named data.txt here that is linked to ~/data.txt.
 
 21. Run the command below to create a file named ~/code/app/main.py
     ```
     cat << EOF > ~/code/app/main.py
+    #! /usr/bin/python3
+
+    print("hello from Python")
+    EOF
     ```
-22.  
+22.  Make the file executable, then notice how the permissions have been modified
+   ```
+   chmod +x ~/code/app/main.py
+   ls -l ~/code/app/main.py # notice how the user, group, and other (all) have x bit, can execute
+   ```
+23. Print the $PATH variable. Copy the ~/code/app/main.py 
