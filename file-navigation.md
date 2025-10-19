@@ -63,9 +63,13 @@ The shell will be our main tool for working with files. When working with files,
     cat ~/code/artifacts/data.txt
     cat ~/data.txt
     ```
+
+At this point both files should contain something different. 
+
+    
 19. copy ~/code/artifacts/data.txt into ~/data.txt. Be sure to make a backup, so we do not lose the contents of data.txt. Confirm the backup worked.
     ```
-    # using absolute paths
+    # using absolute paths. -b is for backup
     cp -b ~/code/artifacts/data.txt ~/data.txt
 
     # using relative paths
@@ -87,7 +91,6 @@ The shell will be our main tool for working with files. When working with files,
 
 20. Delete ~/data.txt
     ```
-    mv data.txt~ backup.txt
     rm ~/data.txt
     ```
 
@@ -116,14 +119,18 @@ The shell will be our main tool for working with files. When working with files,
    ```
 
 ## Part 4: Linking Files
-19. Run ls -i code/artifacts/data.txt and then ls -i ~/data.txt. The -i is for inode, a unique ID for each file.
+19. Run ls -i code/artifacts/data.txt and then ls -i ~/backup.txt. The -i is for inode, a unique ID for each file.
     ```
     ls -i ~/code/artifacts/data.txt
+    ls -i ~/backup.txt
     ```
-21. Delete data.txt and backup.txt
-22. The -i option displays the inode number, a unique ID for each file. Notice that both files share the same inode number — they’re actually the same file. **Remember:** hard links cannot span different file systems.
-23. Copy ~/data.txt to ~/backup.txt, but make sure you create a backup (see man page for copy command). Compare the inode numbers.
-24. To see the stats of the file, run `stat ~/backup.txt` and `stat ~/data.txt`
+21. Create a hard link named ~/data.txt from /code/artifacts/data.txt. Notice that both files share the same inode number — they’re actually the same file. **Remember:** hard links cannot span different file systems.
+    ```bash
+    ln ~/data.txt ~/code/artifacts/data.txt
+    ls -i ~/data.txt
+    ls -i ~/code/artifacts/data.txt
+    ```
+25. To see the stats of the file, run `stat ~/backup.txt` and `stat ~/data.txt` -- start editting here @
 
 
 ### Part 5: File Execution 
