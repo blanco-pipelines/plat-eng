@@ -6,7 +6,7 @@ You will use an **Auto Scaling Group (ASG)** across multiple AZs with an **Appli
 
 ---
 
-## 🧩 Topology
+## Topology
 
 ```
             ┌────────────────────────────┐
@@ -22,7 +22,7 @@ You will use an **Auto Scaling Group (ASG)** across multiple AZs with an **Appli
 
 ---
 
-## ⚙️ Step 1 – Create a Launch Template
+## Step 1 – Create a Launch Template
 
 1. Navigate to **EC2 → Launch Templates → Create Launch Template**.  
 2. Name: `WebAppTemplate`  
@@ -41,11 +41,11 @@ sudo systemctl enable httpd
 6. Network: Use `TrainingVPC` created previously.  
 7. Security Group: Allow HTTP (80) and SSH (22).
 
-✅ Launch template created successfully.
+Launch template created successfully.
 
 ---
 
-## ⚙️ Step 2 – Create an Auto Scaling Group (ASG)
+## Step 2 – Create an Auto Scaling Group (ASG)
 
 1. Go to **EC2 → Auto Scaling Groups → Create Auto Scaling Group**.  
 2. Name: `WebAppASG`.  
@@ -57,11 +57,11 @@ sudo systemctl enable httpd
 6. Set desired capacity: `2`, min `1`, max `3`.  
 7. Configure health checks: `ELB` + `EC2`.  
 
-✅ ASG will now deploy instances across AZs.
+ASG will now deploy instances across AZs.
 
 ---
 
-## ⚙️ Step 3 – Test High Availability
+## Step 3 – Test High Availability
 
 1. Get the ALB DNS name from the **Load Balancers** page.  
 2. Open it in your browser.  
@@ -73,12 +73,12 @@ http://WebAppALB-xxxx.elb.amazonaws.com
 3. Refresh several times → you'll see responses from different AZs.
 
 4. Stop one instance manually.  
-✅ ALB should redirect traffic to the healthy instance automatically.  
-✅ ASG will launch a new one to maintain capacity.
+ALB should redirect traffic to the healthy instance automatically.  
+ASG will launch a new one to maintain capacity.
 
 ---
 
-## 🔍 Verification
+## Verification
 
 | Check | Expected Result |
 |--------|------------------|
@@ -89,7 +89,7 @@ http://WebAppALB-xxxx.elb.amazonaws.com
 
 ---
 
-## 💡 Reflection
+## Reflection
 
 - What's the difference between Multi-AZ and Multi-Region?  
 - Why does AWS recommend designing for failure?  
@@ -97,7 +97,7 @@ http://WebAppALB-xxxx.elb.amazonaws.com
 
 ---
 
-## 🧠 Key Takeaways
+## Key Takeaways
 
 | Concept | Description |
 |----------|--------------|

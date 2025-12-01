@@ -6,7 +6,7 @@ You'll observe how AWS automatically switches tunnels during a failure and monit
 
 ---
 
-## 🧩 Topology
+## Topology
 
 ```
 On-Prem Network (Customer Gateway)
@@ -23,18 +23,18 @@ On-Prem Network (Customer Gateway)
 
 ---
 
-## ⚙️ Step 1 – Create a Virtual Private Gateway (VGW)
+## Step 1 – Create a Virtual Private Gateway (VGW)
 
 1. Navigate to **VPC → Virtual Private Gateways → Create VGW**.  
    - Name: `TrainingVGW`.  
    - ASN: leave default.  
 2. Attach to `TrainingVPC`.
 
-✅ VGW attached to VPC.
+VGW attached to VPC.
 
 ---
 
-## ⚙️ Step 2 – Create a Customer Gateway (CGW)
+## Step 2 – Create a Customer Gateway (CGW)
 
 1. Go to **VPC → Customer Gateways → Create CGW**.  
    - Name: `OnPremCGW`.  
@@ -43,7 +43,7 @@ On-Prem Network (Customer Gateway)
 
 ---
 
-## ⚙️ Step 3 – Create the VPN Connection
+## Step 3 – Create the VPN Connection
 
 1. Go to **VPC → Site-to-Site VPN Connections → Create VPN Connection**.  
 2. Name: `TrainingVPN`.  
@@ -53,11 +53,11 @@ On-Prem Network (Customer Gateway)
    - Routing: static (e.g., 192.168.1.0/24)
 4. Create the connection → Download configuration file (Cisco or generic).
 
-✅ Two tunnels are created automatically for redundancy.
+Two tunnels are created automatically for redundancy.
 
 ---
 
-## ⚙️ Step 4 – Monitor Tunnel State in CloudWatch
+## Step 4 – Monitor Tunnel State in CloudWatch
 
 1. Go to **CloudWatch → Metrics → VPN → By Connection ID**.  
 2. Select metric: `TunnelState`.  
@@ -69,11 +69,11 @@ On-Prem Network (Customer Gateway)
    - Condition: `< 1` for 1 data point
    - Action: Send notification via SNS topic `VPNAlerts`.
 
-✅ CloudWatch will email you when a tunnel goes down.
+CloudWatch will email you when a tunnel goes down.
 
 ---
 
-## ⚙️ Step 5 – Simulate Failover
+## Step 5 – Simulate Failover
 
 1. Manually disable the **primary tunnel** (simulate outage).  
 2. Observe CloudWatch → one tunnel goes DOWN, the other stays UP.  
@@ -81,7 +81,7 @@ On-Prem Network (Customer Gateway)
 
 ---
 
-## 🔍 Verification
+## Verification
 
 | Test | Expected Result |
 |------|------------------|
@@ -91,7 +91,7 @@ On-Prem Network (Customer Gateway)
 
 ---
 
-## 💡 Reflection
+## Reflection
 
 - Why does AWS create two VPN tunnels by default?  
 - What happens if both tunnels are down?  

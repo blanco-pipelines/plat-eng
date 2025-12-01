@@ -8,7 +8,7 @@ Learn to identify and fix three common networking problems in AWS environments:
 
 ---
 
-## 🧩 Lab Architecture
+## Lab Architecture
 
 ```
 Internet
@@ -37,7 +37,7 @@ Internet
 
 ---
 
-## ⚙️ Step 1 – Build Working Environment
+## Step 1 – Build Working Environment
 
 ### Create Main VPC Infrastructure
 1. **Create MainVPC:**
@@ -117,11 +117,11 @@ Internet
     - **Test ALB:** Browse to ALB DNS name
     - **Test peering:** From WebServer1, `ping 172.16.1.x` (TestServer)
 
-✅ **Everything should work perfectly!**
+ **Everything should work perfectly!**
 
 ---
 
-## ⚙️ Step 2 – Break the Environment (Create Problems)
+## Step 2 – Break the Environment (Create Problems)
 
 ### Break Scenario 1: Remove NAT Gateway Internet Access
 1. **Delete NAT Gateway:**
@@ -151,11 +151,11 @@ Internet
    - **Delete route** `172.16.0.0/16` → `pcx-xxxxx`
    - **Repeat for PartnerVPC route table**
 
-✅ **Now your environment is properly broken!**
+**Now your environment is properly broken!**
 
 ---
 
-## 🚨 Problem Scenario 1: Private Instance Can't Reach Internet
+## Problem Scenario 1: Private Instance Can't Reach Internet
 
 ### Symptom
 WebServer2 (in private subnet) cannot download updates or reach external services.
@@ -170,7 +170,7 @@ WebServer2 (in private subnet) cannot download updates or reach external service
    curl -I http://google.com
    ping 8.8.8.8
    ```
-   **Expected Result:** ❌ Connection timeouts
+   **Expected Result:** Connection timeouts
 
 2. **Check route table for private subnet:**
    ```
@@ -197,13 +197,13 @@ WebServer2 (in private subnet) cannot download updates or reach external service
    # From WebServer2
    curl -I http://google.com
    ```
-   **Expected Result:** ✅ HTTP response received
+   **Expected Result:** HTTP response received
 
-**💡 Lesson:** Private instances need NAT Gateway for outbound internet access
+**Lesson:** Private instances need NAT Gateway for outbound internet access
 
 ---
 
-## 🚨 Problem Scenario 2: ALB Shows Unhealthy Targets
+## Problem Scenario 2: ALB Shows Unhealthy Targets
 
 ### Symptom
 Application Load Balancer shows all targets as "Unhealthy" despite instances running.
@@ -244,11 +244,11 @@ Application Load Balancer shows all targets as "Unhealthy" despite instances run
    - **Target Group status should show "Healthy"**
    - **Test ALB DNS name in browser**
 
-**💡 Lesson:** ALB health checks must match actual application paths, and security groups must allow ALB traffic
+**Lesson:** ALB health checks must match actual application paths, and security groups must allow ALB traffic
 
 ---
 
-## 🚨 Problem Scenario 3: VPC Peering Traffic Fails
+## Problem Scenario 3: VPC Peering Traffic Fails
 
 ### Symptom
 Cannot communicate between MainVPC and PartnerVPC despite peering connection being active.
@@ -294,11 +294,11 @@ Cannot communicate between MainVPC and PartnerVPC despite peering connection bei
    ```
    **Expected Result:** ✅ Connection successful
 
-**💡 Lesson:** VPC peering requires bidirectional route table entries - creating the peering connection is only half the work
+**Lesson:** VPC peering requires bidirectional route table entries - creating the peering connection is only half the work
 
 ---
 
-## 🔍 Final Verification Checklist
+## Final Verification Checklist
 
 | Problem | Symptom | Root Cause | Solution | Status |
 |---------|---------|------------|----------|--------|
@@ -308,7 +308,7 @@ Cannot communicate between MainVPC and PartnerVPC despite peering connection bei
 
 ---
 
-## 💡 Troubleshooting Best Practices
+## Troubleshooting Best Practices
 
 ### Systematic Approach
 1. **Layer by Layer:** Physical → Network → Transport → Application

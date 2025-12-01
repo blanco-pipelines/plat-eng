@@ -6,7 +6,7 @@ You'll configure a custom domain to point to a web server and test resolution us
 
 ---
 
-## 🧩 Topology
+## Topology
 
 ```
 Browser ⇄ Route 53 ⇄ ALB ⇄ Web Servers in VPC
@@ -14,7 +14,7 @@ Browser ⇄ Route 53 ⇄ ALB ⇄ Web Servers in VPC
 
 ---
 
-## ⚙️ Step 1 – Create a Hosted Zone
+## Step 1 – Create a Hosted Zone
 
 ### Option A: If You Own a Domain
 1. Go to **Route 53 → Hosted Zones → Create Hosted Zone**  
@@ -30,12 +30,12 @@ Browser ⇄ Route 53 ⇄ ALB ⇄ Web Servers in VPC
    - **Type:** Public Hosted Zone  
    - **VPC association:** none for public zones
 
-> 💡 **Note:** Using `.example` domains won't work for real internet resolution, but you can still practice Route 53 configuration and test within AWS services like ALB.
+> **Note:** Using `.example` domains won't work for real internet resolution, but you can still practice Route 53 configuration and test within AWS services like ALB.
 
 ### Option C: Focus on Private Hosted Zone Only
 Skip the public zone and go directly to **Step 3** to work with private DNS resolution within your VPC.
 
-✅ You'll see four **NS** records and one **SOA** record automatically created.
+ You'll see four **NS** records and one **SOA** record automatically created.
 
 ---
 
@@ -61,7 +61,7 @@ Skip the public zone and go directly to **Step 3** to work with private DNS reso
 
 ---
 
-## ⚙️ Step 3 – Optional: Create Private Hosted Zone
+## Step 3 – Optional: Create Private Hosted Zone
 
 1. Go to **Route 53 → Create Hosted Zone** again.  
 2. Select **Private Hosted Zone**.  
@@ -71,11 +71,11 @@ Skip the public zone and go directly to **Step 3** to work with private DNS reso
    - Type: A  
    - Value: DBServer private IP
 
-✅ This enables name resolution only **within the VPC**.
+ This enables name resolution only **within the VPC**.
 
 ---
 
-## ⚙️ Step 4 – Test DNS Resolution
+## Step 4 – Test DNS Resolution
 
 ### Option A: Testing with Real Domain
 From your local machine:
@@ -119,14 +119,14 @@ ping db.internal
    - Create an **Alias record** pointing to your ALB
    - This works without owning a domain
 
-✅ **Expected Results:**
+**Expected Results:**
 - **Real domain:** Records resolve globally  
 - **Example domain:** Records visible in Route 53 console, testable within AWS
 - **Private records:** Resolve only within the VPC
 
 ---
 
-## 🔍 Verification
+## Verification
 
 ### For Real Domain Users
 | Test | Expected Result |
@@ -160,7 +160,7 @@ nslookup db.internal         # Test private DNS
 
 ---
 
-## 💡 Reflection
+## Reflection
 
 - How does Route 53 differ from traditional on-prem DNS servers?  
 - Why separate public and private zones?  

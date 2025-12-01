@@ -6,7 +6,7 @@ You'll deploy two web servers across multiple Availability Zones and test failov
 
 ---
 
-## 🧩 Topology
+## Topology
 
 ```
                ┌────────────┐
@@ -18,7 +18,7 @@ Internet ⇄ ALB │ HTTP:80    │
 
 ---
 
-## ⚙️ Step 1 – Launch One new Web Server and reuse the existing one
+## Step 1 – Launch One new Web Server and reuse the existing one
 
 1. Use your **TrainingVPC** from Day 3 labs.
 2. Add a new public subnet :
@@ -43,7 +43,7 @@ sudo systemctl enable httpd
 
 ---
 
-## ⚙️ Step 2 – Create a Target Group
+## Step 2 – Create a Target Group
 
 1. Go to **EC2 → Target Groups → Create Target Group**.  
 2. Choose **Instances** as target type.  
@@ -54,11 +54,11 @@ sudo systemctl enable httpd
 7. Add both EC2 instances as targets.  
 8. Health check path: `/`
 
-✅ Wait until targets show as **healthy**.
+Wait until targets show as **healthy**.
 
 ---
 
-## ⚙️ Step 3 – Create Application Load Balancer
+## Step 3 – Create Application Load Balancer
 
 1. Go to **Load Balancers → Create Load Balancer → Application Load Balancer**  
 2. Name: `TrainingALB`  
@@ -68,11 +68,11 @@ sudo systemctl enable httpd
 6. Security Group: Allow HTTP (80) from 0.0.0.0/0.  
 7. Target Group: Select `WebTG`.
 
-✅ ALB will get a **DNS name** like `trainingalb-xxxx.elb.amazonaws.com`.
+ALB will get a **DNS name** like `trainingalb-xxxx.elb.amazonaws.com`.
 
 ---
 
-## ⚙️ Step 4 – Test Load Balancing
+## Step 4 – Test Load Balancing
 
 1. Open your browser:
 
@@ -84,19 +84,19 @@ http://trainingalb-xxxx.elb.amazonaws.com
 - "Hello from ip-10-0-1-xx"
 - "Hello from ip-10-0-2-xx"
 
-✅ ALB distributes traffic evenly between both servers.
+ALB distributes traffic evenly between both servers.
 
 ---
 
-## ⚙️ Step 5 – Simulate Failover
+## Step 5 – Simulate Failover
 
 1. Stop EC2-B in the AWS Console.  
 2. Refresh your browser again.  
-✅ All traffic now goes to EC2-A (no downtime).
+All traffic now goes to EC2-A (no downtime).
 
 ---
 
-## 🔍 Verification
+## Verification
 
 | Test | Expected Result |
 |------|------------------|
@@ -107,7 +107,7 @@ http://trainingalb-xxxx.elb.amazonaws.com
 
 ---
 
-## 💡 Reflection
+## Reflection
 
 - What layer (L7 or L4) does the ALB operate at?  
 - How do health checks improve availability?  
